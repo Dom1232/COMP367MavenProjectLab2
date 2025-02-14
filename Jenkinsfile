@@ -18,5 +18,10 @@ pipeline {
                 bat "mvn clean compile"
             }
         }
+        stage('Deploy'){
+            steps {
+                bat "java -jar target/MavenWebApp.jar"
+            }
+        }
     }
 }
