@@ -14,13 +14,12 @@ pipeline {
         }
         stage('Build'){
             steps {
-                bat "mvn -Dmaven.test.failure.ignore=true clean package"
-                bat "mvn clean compile"
+                bat "mvn clean package"
             }
         }
         stage('Deploy'){
             steps {
-                bat "java -jar target/MavenWebApp.jar"
+                bat "java -jar target/MavenWebApp-0.0.1-SNAPSHOT.jar"
             }
         }
     }
