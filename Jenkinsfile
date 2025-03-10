@@ -4,7 +4,6 @@ pipeline {
     tools {
       jdk 'JDK'
       maven 'MAVEN3'
-      dockerTool 'Docker'
     }
 
     environment {
@@ -25,9 +24,8 @@ pipeline {
 
         stage('Docker Login') {
             steps {
-                sh 'docker --version'
-                withCredentials([string(credentialsId: 'docker-token', variable: 'DOCKER_TOKEN')]) {
-                    bat "echo %DOCKER_TOKEN% | docker login -u dom1232 --password-stdin"
+                    withCredentials([usernamePassword(credentialsId: 'e31bf634-3049-47e9-941f-4409f8ca7698', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+				    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                 }
             }
         }
