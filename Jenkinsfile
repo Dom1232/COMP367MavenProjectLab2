@@ -8,6 +8,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'dom1232/mavenwebapp'
+	DOCKER_HOST = "npipe:////./pipe/docker_engine"
     }
 
     stages {
@@ -24,6 +25,7 @@ pipeline {
 
         stage('Docker Login') {
             steps {
+		bat 'docker info'
                 withCredentials([usernamePassword(credentialsId: 'e31bf634-3049-47e9-941f-4409f8ca7698', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
 		    bat "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                 }
