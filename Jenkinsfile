@@ -25,7 +25,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 withCredentials([string(credentialsId: 'docker-token', variable: 'DOCKER_TOKEN')]) {
-                    echo "Logging into Docker"
+                    echo "Logging into Docker, ${DOCKER_TOKEN[0..3]}****"
                     bat "echo %DOCKER_TOKEN% | docker login -u dom1232 --password-stdin"
                 }
             }
