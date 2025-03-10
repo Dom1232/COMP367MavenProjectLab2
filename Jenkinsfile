@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'dom1232/mavenwebapp'
-	DOCKER_HOST = "npipe:////./pipe/docker_engine"
+	DOCKER_HOST = "tcp://docker:2376"
     }
 
     stages {
