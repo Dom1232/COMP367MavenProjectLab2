@@ -35,19 +35,19 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh "docker build -t %DOCKER_IMAGE% ."
+                sh "docker build -t \$DOCKER_IMAGE ."
             }
         }
 
         stage('Docker Push') {
             steps {
-                sh "docker push %DOCKER_IMAGE%"
+                sh "docker push \$DOCKER_IMAGE"
             }
         }
 
         stage('Deploy') {
             steps {
-                sh "docker run -d -p 8080:8080 %DOCKER_IMAGE%"
+                sh "docker run -d -p 8081:8081 \$DOCKER_IMAGE"
             }
         }
     }
