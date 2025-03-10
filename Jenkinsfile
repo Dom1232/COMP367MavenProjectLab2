@@ -24,6 +24,7 @@ pipeline {
 
         stage('Docker Login') {
             steps {
+                sh 'docker --version'
                 withCredentials([string(credentialsId: 'docker-token', variable: 'DOCKER_TOKEN')]) {
                     bat "echo %DOCKER_TOKEN% | docker login -u dom1232 --password-stdin"
                 }
