@@ -44,11 +44,5 @@ pipeline {
                 sh "docker push \$DOCKER_IMAGE"
             }
         }
-
-        stage('Deploy') {
-            steps {
-                sh "docker run -d -p 8085:8085 \$DOCKER_IMAGE"
-            }
-        }
     }
 }
