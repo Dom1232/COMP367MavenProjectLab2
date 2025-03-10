@@ -19,34 +19,34 @@ pipeline {
         }
         stage('Build Maven Project'){
             steps {
-                bat "mvn clean package"
+                sh "mvn clean package"
             }
         }
 
         stage('Docker Login') {
             steps {
-		bat 'docker info'
+		sh 'docker info'
                 withCredentials([usernamePassword(credentialsId: 'e31bf634-3049-47e9-941f-4409f8ca7698', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-		    bat "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+		    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
                 }
             }
         }
 
         stage('Docker Build') {
             steps {
-                bat "docker build -t %DOCKER_IMAGE% ."
+                sh "docker build -t %DOCKER_IMAGE% ."
             }
         }
 
         stage('Docker Push') {
             steps {
-                bat "docker push %DOCKER_IMAGE%"
+                sh "docker push %DOCKER_IMAGE%"
             }
         }
 
         stage('Deploy') {
             steps {
-                bat "docker run -d -p 8080:8080 %DOCKER_IMAGE%"
+                sh "docker run -d -p 8080:8080 %DOCKER_IMAGE%"
             }
         }
     }
