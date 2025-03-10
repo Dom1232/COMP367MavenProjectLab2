@@ -47,7 +47,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh "docker run -d -p 8081:8080 \$DOCKER_IMAGE"
+                sh "docker run -d -p 8085:8085 \$DOCKER_IMAGE"
             }
         }
     }
